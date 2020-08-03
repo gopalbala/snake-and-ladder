@@ -72,11 +72,14 @@ public class Game {
             Player player = players.poll();
             int val = dice.roll();
             int newPosition = player.getPosition() + val;
-            player.setPosition(getNewPosition(newPosition));
-            if (player.getPosition() >= board.getEnd())
+            if (player.getPosition() > board.getEnd())
+                player.setPosition(player.getPosition());
+            else if (player.getPosition() == board.getEnd()) {
                 player.setWon(true);
-            else
+            } else {
+                player.setPosition(getNewPosition(newPosition));
                 players.offer(player);
+            }
         }
     }
 
