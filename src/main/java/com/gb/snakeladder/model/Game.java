@@ -68,28 +68,37 @@ public class Game {
     }
 
     public void playGame() {
-        while (players.size() >= 2) {
+        while (true) {
             Player player = players.poll();
             int val = dice.roll();
             int newPosition = player.getPosition() + val;
-            if (player.getPosition() > board.getEnd())
+            if (newPosition > board.getEnd()) {
                 player.setPosition(player.getPosition());
-            else if (player.getPosition() == board.getEnd()) {
+                players.offer(player);
+            } else if (newPosition == board.getEnd()) {
                 player.setWon(true);
+                System.out.println("Player " + player.getName() + " Won.");
             } else {
                 player.setPosition(getNewPosition(newPosition));
+                System.out.println("Setting " + player.getName() +"'s new position to " + player.getPosition());
                 players.offer(player);
+            }
+            if (players.size() < 2) {
+                break;
             }
         }
     }
 
     private int getNewPosition(int newPosition) {
         for (Snake snake : snakes) {
-            if (snake.getHead() == newPosition)
+            if (snake.getHead() == newPosition) {
+                System.out.println("Snake Bit");
                 return snake.getTail();
+            }
         }
         for (Ladder ladder : ladders) {
             if (ladder.getStart() == newPosition) {
+                System.out.println("Climbed ladder");
                 return ladder.getEnd();
             }
         }
