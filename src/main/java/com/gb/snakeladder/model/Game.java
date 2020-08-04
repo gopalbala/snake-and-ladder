@@ -75,13 +75,15 @@ public class Game {
             if (newPosition > board.getEnd()) {
                 player.setPosition(player.getPosition());
                 players.offer(player);
-            } else if (newPosition == board.getEnd()) {
-                player.setWon(true);
-                System.out.println("Player " + player.getName() + " Won.");
             } else {
                 player.setPosition(getNewPosition(newPosition));
-                System.out.println("Setting " + player.getName() +"'s new position to " + player.getPosition());
-                players.offer(player);
+                if (player.getPosition() == board.getEnd()) {
+                    player.setWon(true);
+                    System.out.println("Player " + player.getName() + " Won.");
+                } else {
+                    System.out.println("Setting " + player.getName() + "'s new position to " + player.getPosition());
+                    players.offer(player);
+                }
             }
             if (players.size() < 2) {
                 break;
