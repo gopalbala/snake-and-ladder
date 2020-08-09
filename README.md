@@ -1,5 +1,7 @@
 # snake-and-ladder
 Develop a snake and ladder game  
+
+![Image of Snakes and Ladders]
 https://upload.wikimedia.org/wikipedia/commons/a/a7/Snakes_and_Ladders.jpg
 
 Board can be of any size
